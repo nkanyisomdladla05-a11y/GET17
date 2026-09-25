@@ -1,0 +1,157 @@
+@import "tailwindcss";
+
+/*
+  60-30-10 palette from the Get Empire Forex logo.
+  60% white / light grey surfaces, 30% charcoal type, 10% brand violet.
+*/
+@theme {
+  --color-paper: #ffffff; /* --bg-primary */
+  --color-paper-2: #f8f9fa; /* --bg-secondary */
+  --color-paper-3: #f1f3f6;
+  --color-ink: #111111; /* --text-main, --divider-dark */
+  --color-ink-2: #1f1f1f;
+  --color-ink-3: #2a2a2a;
+  --color-mist: #555555; /* --text-muted */
+  --color-line: #e2e8f0; /* --border-light */
+  --color-brand: #4633b9; /* --brand-violet */
+  --color-brand-2: #382796; /* --brand-violet-hover */
+  --color-brand-3: #8b7cf6; /* light violet for gradients and second robot */
+  --color-brand-soft: #efecfb;
+  --color-accent: #8b7cf6;
+  --color-bull: #16a34a;
+  --color-bear: #dc2626;
+  --color-ribbon: #4633b9;
+  --color-whatsapp: #25d366;
+  --font-sans: "Figtree", ui-sans-serif, system-ui, sans-serif;
+  --shadow-glow: 0 0 60px rgba(70, 51, 185, 0.25);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 8rem;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: var(--color-ink);
+}
+
+.dark-zone,
+.dark-zone h1,
+.dark-zone h2,
+.dark-zone h3,
+.dark-zone h4 {
+  color: #ffffff;
+}
+
+::selection {
+  background: rgba(70, 51, 185, 0.25);
+}
+
+.bg-grid {
+  background-image:
+    linear-gradient(rgba(17, 17, 17, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(17, 17, 17, 0.05) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse at center, black 40%, transparent 75%);
+}
+
+.dark-zone .bg-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+}
+
+/* Cards: white with thin light-grey border */
+.glass {
+  background: var(--color-paper);
+  border: 1px solid var(--color-line);
+  box-shadow: 0 8px 28px rgba(17, 17, 17, 0.05);
+}
+
+/* Frosted panels that sit in front of 3D */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  box-shadow: 0 18px 50px rgba(17, 17, 17, 0.08);
+  backdrop-filter: blur(18px);
+}
+
+/* Cards inside violet or charcoal zones */
+.glass-dark {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(14px);
+}
+
+.text-gradient {
+  background: linear-gradient(120deg, #4633b9 0%, #6b5ce7 55%, #8b7cf6 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/*
+  Reveal elements are hidden only once GSAP has confirmed it is running
+  (html.has-motion). Without JS, or with reduced motion, content is visible.
+*/
+html.has-motion .reveal {
+  opacity: 0;
+  transform: translateY(28px);
+}
+
+html.has-motion .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.tilt-card {
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+/* Live price ribbon: always scrolls (duplicated content, seamless loop) */
+.ticker-track {
+  display: flex;
+  gap: 2.75rem;
+  width: max-content;
+  animation: ticker 32s linear infinite;
+  will-change: transform;
+}
+
+.ticker-track:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track {
+    animation: ticker 32s linear infinite;
+  }
+}
+
+@keyframes ticker {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+input,
+select,
+textarea {
+  color-scheme: light;
+  color: var(--color-ink);
+  background: #ffffff;
+}
