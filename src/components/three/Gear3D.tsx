@@ -5,6 +5,7 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { Float, OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
 import type { OrbitControls as OrbitControlsImpl } from "three-stdlib";
+import { onLightCanvasCreated } from "./canvasClear";
 import { motionScale } from "./drive";
 
 /** Build the logo's gear outline as an extruded shape */
@@ -135,8 +136,9 @@ export default function Gear3D({
       <Canvas
         dpr={[1, 1.15]}
         camera={{ position: [0, 0, 4], fov: 38 }}
-        gl={{ antialias: false, alpha: true, stencil: false, powerPreference: "high-performance" }}
-        style={{ background: "transparent", touchAction: interactive ? "none" : "auto" }}
+        gl={{ antialias: false, alpha: false, stencil: false, powerPreference: "high-performance" }}
+        style={{ background: "#ffffff", touchAction: interactive ? "none" : "auto" }}
+        onCreated={(state) => onLightCanvasCreated(state, "paper")}
         performance={{ min: 0.5 }}
       >
         <ambientLight intensity={0.8} />

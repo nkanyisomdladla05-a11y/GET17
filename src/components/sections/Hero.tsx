@@ -119,7 +119,7 @@ export function Hero() {
             </div>
           </div>
 
-          <div className="hero-emblem relative h-[380px] sm:h-[480px] lg:h-[560px]">
+          <div className="hero-emblem relative h-[380px] bg-paper-2 sm:h-[480px] lg:h-[560px]">
             <HeroEmblemCanvas scrollRef={scrollRef} />
             <p className="pointer-events-none absolute bottom-3 left-0 right-0 text-center font-mono text-[11px] uppercase tracking-widest text-mist">
               Move your cursor · scroll to spin the Empire gear
@@ -152,7 +152,7 @@ export function Hero() {
               </p>
             </div>
 
-            <div className="relative h-[420px] bg-[radial-gradient(ellipse_at_top,rgba(70,51,185,0.08),transparent_60%)] sm:h-[520px] lg:h-[600px]">
+            <div className="relative h-[420px] bg-white bg-[radial-gradient(ellipse_at_top,rgba(70,51,185,0.08),transparent_60%)] sm:h-[520px] lg:h-[600px]">
               <MarketCanvas pair={pair} mode="depth" scrollRef={scrollRef} />
               <div className="glass-panel pointer-events-none absolute left-4 top-4 rounded-xl px-3 py-2">
                 <p className="font-mono text-xs font-bold text-ink">

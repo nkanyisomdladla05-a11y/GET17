@@ -4,6 +4,7 @@ import { useMemo, useRef, type MutableRefObject } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Float } from "@react-three/drei";
 import * as THREE from "three";
+import { onLightCanvasCreated } from "./canvasClear";
 import { motionScale } from "./drive";
 
 function gearShape(teeth = 10, outer = 1.15, inner = 0.88, hole = 0.48) {
@@ -148,11 +149,12 @@ export default function HeroEmblem({
         camera={{ position: [0, 0.2, 5.2], fov: 38 }}
         gl={{
           antialias: true,
-          alpha: true,
+          alpha: false,
           powerPreference: "high-performance",
           stencil: false,
         }}
-        style={{ background: "transparent" }}
+        style={{ background: "#f8f9fa" }}
+        onCreated={(state) => onLightCanvasCreated(state, "paper-2")}
         performance={{ min: 0.5 }}
       >
         <ambientLight intensity={0.7} />

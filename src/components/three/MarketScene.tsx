@@ -11,6 +11,7 @@ import { Canvas, useFrame, type ThreeEvent } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
 import type { OrbitControls as OrbitControlsImpl } from "three-stdlib";
+import { onLightCanvasCreated } from "./canvasClear";
 import { isScrolling, motionScale } from "./drive";
 import {
   generateCandles,
@@ -401,11 +402,12 @@ export default function MarketScene({
         camera={{ position: [0, 2.2, 8.4], fov: 40 }}
         gl={{
           antialias: false,
-          alpha: true,
+          alpha: false,
           powerPreference: "high-performance",
           stencil: false,
         }}
-        style={{ background: "transparent", touchAction: "none" }}
+        style={{ background: "#ffffff", touchAction: "none" }}
+        onCreated={(state) => onLightCanvasCreated(state, "paper")}
         performance={{ min: 0.5 }}
       >
         <ambientLight intensity={0.75} />

@@ -4,6 +4,7 @@ import { useRef, type MutableRefObject } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Float, MeshDistortMaterial, OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
+import { onLightCanvasCreated } from "./canvasClear";
 import { motionScale } from "./drive";
 
 interface RobotCoreProps {
@@ -118,8 +119,9 @@ export default function RobotCore({
       <Canvas
         dpr={[1, isHero ? 1.2 : 1]}
         camera={{ position: [0, 0, isHero ? 4.6 : 4.2], fov: 40 }}
-        gl={{ antialias: false, alpha: true, stencil: false, powerPreference: "high-performance" }}
-        style={{ background: "transparent", touchAction: isHero ? "none" : "auto" }}
+        gl={{ antialias: false, alpha: false, stencil: false, powerPreference: "high-performance" }}
+        style={{ background: "#ffffff", touchAction: isHero ? "none" : "auto" }}
+        onCreated={(state) => onLightCanvasCreated(state, "paper")}
         performance={{ min: 0.5 }}
       >
         <ambientLight intensity={0.55} />

@@ -3,6 +3,7 @@
 import { useRef, type MutableRefObject } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
+import { onLightCanvasCreated } from "./canvasClear";
 import { motionScale } from "./drive";
 
 function Knob({
@@ -56,8 +57,9 @@ export default function RiskDial({ turns }: { turns: number }) {
       <Canvas
         dpr={[1, 1.1]}
         camera={{ position: [0, 0.6, 3.4], fov: 40 }}
-        gl={{ antialias: false, alpha: true, stencil: false, powerPreference: "high-performance" }}
-        style={{ background: "transparent" }}
+        gl={{ antialias: false, alpha: false, stencil: false, powerPreference: "high-performance" }}
+        style={{ background: "#ffffff" }}
+        onCreated={(state) => onLightCanvasCreated(state, "paper")}
         performance={{ min: 0.5 }}
       >
         <ambientLight intensity={0.75} />
