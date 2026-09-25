@@ -4,6 +4,7 @@ import { useMemo, useRef, type MutableRefObject } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Float, OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
+import type { OrbitControls as OrbitControlsImpl } from "three-stdlib";
 import { motionScale } from "./drive";
 
 /** Build the logo's gear outline as an extruded shape */
@@ -95,7 +96,7 @@ function Gear({
 }
 
 function OrbitDrive({ hot }: { hot: MutableRefObject<boolean> }) {
-  const controls = useRef<any>(null);
+  const controls = useRef<OrbitControlsImpl>(null);
   useFrame(() => {
     if (controls.current) {
       controls.current.autoRotateSpeed = 0.35 * motionScale(hot.current);

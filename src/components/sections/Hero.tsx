@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import { HeroEmblemCanvas, MarketCanvas } from "@/components/three/SceneCanvas";
-import type { MarketMode } from "@/components/three/MarketScene";
 import { PAIRS } from "@/components/three/candles";
 import { ButtonLink } from "@/components/ui/Button";
 import { site } from "@/data/site";
@@ -17,7 +16,6 @@ export function Hero() {
   const root = useRef<HTMLDivElement>(null);
   const scrollRef = useRef(0);
   const [pairIndex, setPairIndex] = useState(0);
-  const [mode, setMode] = useState<MarketMode>("candles");
   const pair = PAIRS[pairIndex];
 
   useEffect(() => {
@@ -149,37 +147,19 @@ export function Hero() {
                   </button>
                 ))}
               </div>
-              <div className="flex items-center gap-1 rounded-full border border-line bg-paper-2 p-1 text-xs font-semibold">
-                {(
-                  [
-                    ["candles", "3D Candlesticks"],
-                    ["depth", "Depth of Market"],
-                  ] as [MarketMode, string][]
-                ).map(([m, label]) => (
-                  <button
-                    key={m}
-                    onClick={() => setMode(m)}
-                    className={`rounded-full px-3 py-1.5 transition ${
-                      mode === m ? "bg-ink text-white" : "text-mist hover:text-ink"
-                    }`}
-                    aria-pressed={mode === m}
-                  >
-                    {label}
-                  </button>
-                ))}
-              </div>
+              <p className="rounded-full border border-line bg-paper-2 px-3 py-1.5 text-xs font-semibold text-ink">
+                Depth of market
+              </p>
             </div>
 
             <div className="relative h-[420px] bg-[radial-gradient(ellipse_at_top,rgba(70,51,185,0.08),transparent_60%)] sm:h-[520px] lg:h-[600px]">
-              <MarketCanvas pair={pair} mode={mode} scrollRef={scrollRef} />
+              <MarketCanvas pair={pair} mode="depth" scrollRef={scrollRef} />
               <div className="glass-panel pointer-events-none absolute left-4 top-4 rounded-xl px-3 py-2">
                 <p className="font-mono text-xs font-bold text-ink">
                   {pair.symbol} <span className="text-mist">· {pair.label}</span>
                 </p>
                 <p className="text-[11px] text-mist">
-                  {mode === "candles"
-                    ? "Live candles · hover for OHLC"
-                    : "Order-book depth · bids vs asks"}
+                  Order-book depth · bids vs asks
                 </p>
               </div>
               <div className="pointer-events-none absolute bottom-4 left-4 right-4 flex flex-wrap items-center justify-between gap-2 font-mono text-[11px] uppercase tracking-widest text-mist">

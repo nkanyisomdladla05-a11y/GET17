@@ -10,6 +10,7 @@ import {
 import { Canvas, useFrame, type ThreeEvent } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
+import type { OrbitControls as OrbitControlsImpl } from "three-stdlib";
 import { isScrolling, motionScale } from "./drive";
 import {
   generateCandles,
@@ -352,7 +353,7 @@ function ScrollRig({
 /* ------------------------------------------------------------------ */
 
 function MarketOrbit({ hot }: { hot: MutableRefObject<boolean> }) {
-  const controls = useRef<any>(null);
+  const controls = useRef<OrbitControlsImpl>(null);
   useFrame(() => {
     if (!controls.current) return;
     controls.current.autoRotate = true;
